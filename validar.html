@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Validação de Comprovante</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column; /* 🔥 ISSO resolve */
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        font-family: "Nunito", sans-serif;
+
+        background: radial-gradient(ellipse at top, #3d0f6e 0%, #1a0635 100%);
+      }
+
+      /* CARD */
+      .card {
+        width: 100%;
+        max-width: 420px;
+        padding: 34px 26px;
+        border-radius: 28px;
+
+        background: linear-gradient(160deg, #6a1fa8, #7b2fbe, #8e35d4);
+
+        box-shadow:
+          0 40px 100px rgba(0, 0, 0, 0.7),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* STATUS */
+      .status {
+        font-family: "Fredoka One", cursive;
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+
+      .valid {
+        color: #00e676;
+        text-shadow: 0 0 15px rgba(0, 230, 118, 0.6);
+      }
+
+      .invalid {
+        color: #ff4b4b;
+        text-shadow: 0 0 15px rgba(255, 75, 75, 0.6);
+      }
+
+      /* ICON */
+      .icon {
+        font-size: 50px;
+        margin-bottom: 10px;
+      }
+
+      /* NAME */
+      .name {
+        font-family: "Fredoka One", cursive;
+        font-size: 22px;
+        color: #ffd600;
+        margin: 10px 0;
+      }
+
+      /* INFO */
+      .info {
+        color: #fff;
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+
+      .hash {
+        margin-top: 16px;
+        font-family: monospace;
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.6);
+        word-break: break-all;
+      }
+
+      /* FOOTER */
+      .footer {
+        margin-top: 20px;
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      /* HEADER EXTERNO */
+      .page-header {
+        text-align: center;
+        margin-bottom: 22px;
+      }
+
+      .page-header .title {
+        font-family: "Fredoka One", cursive;
+        font-size: 28px;
+        color: #ffd600;
+        text-shadow: 0 0 18px rgba(255, 214, 0, 0.6);
+      }
+
+      .page-header .subtitle {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        color: rgba(255, 255, 255, 0.5);
+        margin-top: 6px;
+      }
+
+      /* RESPONSIVO */
+      @media (max-width: 480px) {
+        .card {
+          padding: 26px 18px;
+        }
+      }
+    </style>
+     <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="main-header">
+      <div class="depin-logo">
+        <span>D</span>
+        <span>E</span>
+        <span>P</span>
+        <span>I</span>
+        <span>N</span>
+      </div>
+      <div class="depin-sub">AD • Marizópolis PB</div>
+    </header>
+    <!-- HEADER EXTERNO -->
+    <div class="page-header">
+      <div class="title">Comprovante de Inscrição</div>
+      <div class="subtitle">Validação Oficial</div>
+    </div>
+
+    <!-- CARD -->
+    <div class="card">
+      <div id="icon" class="icon">⏳</div>
+
+      <div id="status" class="status">Validando...</div>
+
+      <div id="nome" class="name"></div>
+
+      <div id="igreja" class="info"></div>
+
+      <div id="cidade" class="info"></div>
+
+      <div id="hash" class="hash"></div>
+    </div>
+    <footer class="app-footer">
+      <div class="footer-content">
+        <!-- DEV -->
+        <div class="dev">
+          Desenvolvido por
+          <a href="https://moacirdavidag.com" target="_blank" class="dev-name">
+            Moacir David
+          </a>
+
+          <a
+            href="https://instagram.com/moacirdavidag"
+            target="_blank"
+            class="insta"
+          >
+            <i data-lucide="instagram"></i>
+            @moacirdavidag
+          </a>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta">
+          <div class="cta-title">Conheça o <span>eScriptura</span></div>
+
+          <div class="cta-text">
+            Sistema digital para gestão da Escola Bíblica Dominical — ideal para
+            igrejas e especialmente Assembleias de Deus.
+          </div>
+
+          <a
+            href="https://escripturaebd.com?utm_source=depinadmz2026"
+            target="_blank"
+            class="cta-btn"
+          >
+            👉 Ver sistema agora
+          </a>
+
+          <div class="cta-social">
+            <i data-lucide="instagram"></i>
+            @escripturaebd
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -3,10 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>DEPIN AD Marizópolis</title>
+    <title>Treinamento DEPIN - AD Marizópolis/PB</title>
 
     <link
       href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
 
@@ -17,6 +21,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
         min-height: 100vh;
         background: radial-gradient(ellipse at top, #3d0f6e 0%, #1a0635 100%);
         padding: 20px;
@@ -140,6 +145,16 @@
   </head>
 
   <body>
+    <header class="main-header">
+      <div class="depin-logo">
+        <span>D</span>
+        <span>E</span>
+        <span>P</span>
+        <span>I</span>
+        <span>N</span>
+      </div>
+      <div class="depin-sub">AD • Marizópolis PB</div>
+    </header>
     <div class="landing">
       <h1>DEPIN AD Marizópolis</h1>
       <p>Consulta de Comprovante e Certificado Oficial</p>
@@ -164,15 +179,128 @@
 
       function abrirComprovante() {
         const id = document.getElementById("id").value.trim();
-        if (!id) return alert("Digite o código");
+
+        if (!id) {
+          mostrarToast("Digite o código do comprovante");
+          return;
+        }
+
         window.location.href = `${BASE}/comprovante.html?id=${id}`;
       }
 
       function abrirCertificado() {
         const id = document.getElementById("id").value.trim();
-        if (!id) return alert("Digite o código");
+
+        if (!id) {
+          mostrarToast("Digite o código do certificado");
+          return;
+        }
+
+        // 🔥 DATA LIBERAÇÃO
+        const liberacao = new Date("2026-06-06T00:00:00");
+
+        // DATA ATUAL
+        const agora = new Date();
+
+        // 🚫 BLOQUEIA ANTES
+        if (agora < liberacao) {
+          mostrarToast(
+            "⚠️ Os certificados serão liberados somente em 06 de Junho de 2026.",
+          );
+
+          return;
+        }
+
         window.location.href = `${BASE}/certificado.html?id=${id}`;
       }
+
+      // =========================
+      // TOAST
+      // =========================
+      function mostrarToast(texto) {
+        let toast = document.getElementById("toast");
+
+        if (!toast) {
+          toast = document.createElement("div");
+          toast.id = "toast";
+
+          toast.style.position = "fixed";
+          toast.style.left = "50%";
+          toast.style.bottom = "28px";
+          toast.style.transform = "translateX(-50%) translateY(20px)";
+          toast.style.background = "linear-gradient(135deg,#ff1744,#d50000)";
+          toast.style.color = "#fff";
+          toast.style.padding = "14px 18px";
+          toast.style.borderRadius = "16px";
+          toast.style.fontFamily = "'Nunito',sans-serif";
+          toast.style.fontWeight = "800";
+          toast.style.fontSize = "14px";
+          toast.style.boxShadow = "0 10px 30px rgba(0,0,0,0.35)";
+          toast.style.zIndex = "99999";
+          toast.style.opacity = "0";
+          toast.style.transition = "all .25s ease";
+          toast.style.maxWidth = "90%";
+          toast.style.textAlign = "center";
+          toast.style.backdropFilter = "blur(8px)";
+
+          document.body.appendChild(toast);
+        }
+
+        toast.innerHTML = texto;
+
+        toast.style.opacity = "1";
+        toast.style.transform = "translateX(-50%) translateY(0)";
+
+        clearTimeout(window.__toastTimer);
+
+        window.__toastTimer = setTimeout(() => {
+          toast.style.opacity = "0";
+          toast.style.transform = "translateX(-50%) translateY(20px)";
+        }, 4000);
+      }
     </script>
+    <footer class="app-footer">
+      <div class="footer-content">
+        <!-- DEV -->
+        <div class="dev">
+          Desenvolvido por
+          <a href="https://moacirdavidag.com" target="_blank" class="dev-name">
+            Moacir David
+          </a>
+
+          <a
+            href="https://instagram.com/moacirdavidag"
+            target="_blank"
+            class="insta"
+          >
+            <i data-lucide="instagram"></i>
+            @moacirdavidag
+          </a>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta">
+          <div class="cta-title">Conheça o <span>eScriptura</span></div>
+
+          <div class="cta-text">
+            Sistema digital para gestão da Escola Bíblica Dominical — ideal para
+            igrejas e especialmente Assembleias de Deus.
+          </div>
+
+          <a
+            href="https://escripturaebd.com?utm_source=depinadmz2026"
+            target="_blank"
+            class="cta-btn"
+          >
+            👉 Ver sistema agora
+          </a>
+
+          <div class="cta-social">
+            <i data-lucide="instagram"></i>
+            @escripturaebd
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

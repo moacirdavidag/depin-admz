@@ -51,3 +51,196 @@ input {
     height: auto !important;
   }
 }
+
+.main-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* =========================
+   HEADER GLOBAL
+========================= */
+.main-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 28px;
+  user-select: none;
+}
+
+/* LOGO BASE */
+.depin-logo {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(36px, 8vw, 60px);
+  letter-spacing: 4px;
+
+  display: inline-flex;
+  gap: 4px;
+
+  animation: floatLogo 3s ease-in-out infinite;
+}
+
+/* LETRAS INDIVIDUAIS */
+.depin-logo span {
+  display: inline-block;
+
+  text-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 0 10px rgba(255, 255, 255, 0.15);
+
+  transition: transform 0.2s ease;
+}
+
+/* CORES (CADA LETRA) */
+.depin-logo span:nth-child(1) { color: #ff4b8b; } /* D - rosa */
+.depin-logo span:nth-child(2) { color: #ff8c00; } /* E - laranja */
+.depin-logo span:nth-child(3) { color: #ffd600; } /* P - amarelo */
+.depin-logo span:nth-child(4) { color: #4bff91; } /* I - verde */
+.depin-logo span:nth-child(5) { color: #4bb8ff; } /* N - azul */
+
+/* HOVER (efeito divertido) */
+.depin-logo span:hover {
+  transform: translateY(-6px) scale(1.1);
+}
+
+/* SUBTÍTULO */
+.depin-sub {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(12px, 3vw, 15px);
+  font-weight: 700;
+
+  color: #ffffff;
+  opacity: 0.9;
+
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
+
+/* ANIMAÇÃO SUAVE */
+@keyframes floatLogo {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+  100% { transform: translateY(0px); }
+}
+/* ================= FOOTER ================= */
+
+.app-footer {
+  width: 100%;
+  margin-top: 40px;
+  padding: 30px 16px;
+
+  border-radius: 8px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.06)
+  );
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-content {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* DEV */
+.dev {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 18px;
+}
+
+.dev-name {
+  color: #ffd600;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.dev-name:hover {
+  text-decoration: underline;
+}
+
+.insta {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #ff4b8b;
+  text-decoration: none;
+}
+
+/* CTA */
+.cta {
+  padding: 16px;
+  border-radius: 16px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(123, 47, 190, 0.4),
+    rgba(255, 214, 0, 0.08)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* TÍTULO */
+.cta-title {
+  font-family: "Fredoka One", cursive;
+  font-size: 18px;
+  color: #fff;
+}
+
+.cta-title span {
+  color: #ffd600;
+}
+
+/* TEXTO */
+.cta-text {
+  margin: 10px 0 14px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+}
+
+/* BOTÃO */
+.cta-btn {
+  display: inline-block;
+  padding: 12px 18px;
+
+  background: linear-gradient(135deg, #ff4b8b, #ffd600);
+
+  color: #2a0a4a;
+  font-weight: 800;
+  text-decoration: none;
+
+  border-radius: 12px;
+
+  box-shadow: 0 6px 20px rgba(255, 75, 139, 0.4);
+  transition: 0.2s;
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(255, 75, 139, 0.5);
+}
+
+/* SOCIAL */
+.cta-social {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #4bb8ff;
+}
+
+/* RESPONSIVO */
+@media (max-width: 480px) {
+  .cta {
+    padding: 14px;
+  }
+
+  .cta-title {
+    font-size: 16px;
+  }
+}
+

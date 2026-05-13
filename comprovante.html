@@ -1,63 +1,777 @@
 <!doctype html>
+
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Comprovante</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      Treinamento DEPIN - AD Marizópolis/PB - Comprovante de inscrição
+    </title>
+
+    <!-- FONTES -->
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        padding: 24px 16px;
+
+        font-family: "Nunito", sans-serif;
+
+        background: radial-gradient(ellipse at top, #3d0f6e 0%, #1a0635 100%);
+
+        overflow-x: hidden;
+      }
+
+      /* ===================================
+       CARD
+    =================================== */
+
+      .card {
+        width: 100%;
+        max-width: 460px;
+
+        position: relative;
+
+        overflow: hidden;
+
+        border-radius: 32px;
+
+        padding: 36px 28px 32px;
+
+        background: linear-gradient(
+          160deg,
+          #6a1fa8 0%,
+          #7b2fbe 50%,
+          #8e35d4 100%
+        );
+
+        box-shadow:
+          0 40px 100px rgba(0, 0, 0, 0.7),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      }
+
+      /* ===================================
+       BUBBLES
+    =================================== */
+
+      .bubble {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      .b1 {
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.05);
+        top: -130px;
+        right: -90px;
+      }
+
+      .b2 {
+        width: 180px;
+        height: 180px;
+        background: rgba(255, 255, 255, 0.04);
+        bottom: -70px;
+        left: -50px;
+      }
+
+      .b3 {
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 214, 0, 0.06);
+        top: 200px;
+        left: -30px;
+      }
+
+      /* ===================================
+       HEADER
+    =================================== */
+
+      .event-header {
+        text-align: center;
+        margin-bottom: 24px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .ev-label {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 4px;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+
+      .ev-title {
+        font-family: "Fredoka One", cursive;
+        font-size: 18px;
+        color: #fff;
+        line-height: 1.3;
+      }
+
+      .ev-title .infantil {
+        display: block;
+
+        font-size: 32px;
+
+        color: #ffd600;
+
+        text-shadow: 0 0 20px rgba(255, 214, 0, 0.5);
+
+        letter-spacing: 2px;
+      }
+
+      .ev-info {
+        margin-top: 8px;
+
+        font-size: 12px;
+        font-weight: 700;
+
+        color: rgba(255, 255, 255, 0.65);
+
+        line-height: 1.8;
+      }
+
+      /* ===================================
+       DIVIDER
+    =================================== */
+
+      .divider {
+        height: 3px;
+
+        border-radius: 3px;
+
+        margin: 18px 0;
+
+        position: relative;
+        z-index: 1;
+
+        background: linear-gradient(
+          90deg,
+          #ff4b8b,
+          #ff8c00,
+          #ffd600,
+          #4bff91,
+          #4bb8ff,
+          #b44bff
+        );
+      }
+
+      /* ===================================
+       AVATAR
+    =================================== */
+
+      .avatar-section {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 16px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .avatar-outer {
+        position: relative;
+        width: 116px;
+        height: 116px;
+      }
+
+      .avatar-ring {
+        width: 116px;
+        height: 116px;
+
+        border-radius: 50%;
+
+        padding: 3px;
+
+        background: conic-gradient(
+          #ff4b8b,
+          #ffd600,
+          #4bff91,
+          #4bb8ff,
+          #b44bff,
+          #ff4b8b
+        );
+
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .avatar-img {
+        width: 100%;
+        height: 100%;
+
+        border-radius: 50%;
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        border: 3px solid #7b2fbe;
+      }
+
+      .badge-ok {
+        position: absolute;
+
+        bottom: -2px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        background: linear-gradient(135deg, #00e676, #1de9b6);
+
+        color: #003320;
+
+        font-size: 9px;
+        font-weight: 900;
+
+        letter-spacing: 2px;
+
+        padding: 3px 12px;
+
+        border-radius: 20px;
+
+        white-space: nowrap;
+
+        box-shadow: 0 4px 12px rgba(0, 230, 118, 0.4);
+      }
+
+      /* ===================================
+       INFO
+    =================================== */
+
+      .info {
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 20px;
+      }
+
+      .lbl {
+        font-size: 10px;
+        font-weight: 800;
+        color: rgba(255, 255, 255, 0.45);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+
+      .info-name {
+        font-family: "Fredoka One", cursive;
+
+        font-size: 24px;
+
+        color: #ffd600;
+
+        line-height: 1.2;
+
+        margin-bottom: 16px;
+
+        text-shadow: 0 2px 12px rgba(255, 214, 0, 0.3);
+      }
+
+      .info-grid {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+
+        margin-bottom: 14px;
+      }
+
+      .info-box {
+        background: rgba(0, 0, 0, 0.25);
+
+        border: 1px solid rgba(255, 255, 255, 0.08);
+
+        border-radius: 14px;
+
+        padding: 10px 8px;
+
+        text-align: center;
+      }
+
+      .ibv {
+        font-size: 13px;
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.3;
+      }
+
+      .date-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+
+        background: rgba(255, 255, 255, 0.1);
+
+        border: 1px solid rgba(255, 255, 255, 0.18);
+
+        border-radius: 20px;
+
+        padding: 6px 16px;
+
+        font-size: 12px;
+
+        color: rgba(255, 255, 255, 0.9);
+
+        font-weight: 700;
+      }
+
+      /* ===================================
+       QR
+    =================================== */
+
+      .qr-section {
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        margin: 4px 0;
+      }
+
+      .qr-lbl {
+        font-size: 10px;
+        font-weight: 800;
+
+        color: rgba(255, 255, 255, 0.45);
+
+        letter-spacing: 3px;
+
+        text-transform: uppercase;
+
+        margin-bottom: 12px;
+      }
+
+      .qr-outer {
+        display: inline-block;
+
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.12),
+          rgba(255, 255, 255, 0.06)
+        );
+
+        border: 1.5px solid rgba(255, 255, 255, 0.2);
+
+        border-radius: 22px;
+
+        padding: 14px;
+
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      .qr-outer img {
+        display: block;
+
+        border-radius: 10px;
+
+        width: 170px;
+        height: 170px;
+      }
+
+      .hash-code {
+        margin-top: 10px;
+
+        font-family: "Courier New", monospace;
+
+        font-size: 10px;
+        font-weight: 700;
+
+        color: rgba(255, 255, 255, 0.6);
+
+        letter-spacing: 0.5px;
+
+        word-break: break-all;
+      }
+
+      /* ===================================
+       FOOTER
+    =================================== */
+
+      .church-footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin-top: 20px;
+
+        position: relative;
+        z-index: 1;
+      }
+
+      .church-footer img {
+        height: 72px;
+
+        width: auto;
+
+        max-width: 200px;
+
+        filter: brightness(0) invert(1)
+          drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+
+        opacity: 0.95;
+
+        object-fit: contain;
+      }
+
+      /* ===================================
+       BUTTON
+    =================================== */
+
+      .btn-download {
+        display: block;
+
+        width: 100%;
+
+        margin-top: 22px;
+
+        padding: 15px;
+
+        background: linear-gradient(
+          135deg,
+          #ff4b8b 0%,
+          #ff8c00 50%,
+          #ffd600 100%
+        );
+
+        color: #2a0a4a;
+
+        font-family: "Fredoka One", cursive;
+
+        font-size: 17px;
+
+        text-align: center;
+
+        border-radius: 16px;
+
+        border: none;
+
+        cursor: pointer;
+
+        letter-spacing: 1px;
+
+        box-shadow: 0 8px 28px rgba(255, 75, 139, 0.45);
+
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+
+        position: relative;
+        z-index: 1;
+      }
+
+      .btn-download:hover {
+        transform: translateY(-2px);
+
+        box-shadow: 0 14px 36px rgba(255, 75, 139, 0.55);
+      }
+
+      /* ===================================
+       RESPONSIVO
+    =================================== */
+
+      @media (max-width: 520px) {
+        body {
+          padding: 14px;
+        }
+
+        .card {
+          padding: 28px 20px;
+          border-radius: 26px;
+        }
+
+        .ev-title {
+          font-size: 16px;
+        }
+
+        .ev-title .infantil {
+          font-size: 28px;
+        }
+
+        .info-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .qr-outer img {
+          width: 150px;
+          height: 150px;
+        }
+      }
+    </style>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <div class="card">
+    <header class="main-header">
+      <div class="depin-logo">
+        <span>D</span>
+        <span>E</span>
+        <span>P</span>
+        <span>I</span>
+        <span>N</span>
+      </div>
+      <div class="depin-sub">AD • Marizópolis PB</div>
+    </header>
+    <div class="card" id="card">
+      ```
+      <!-- BUBBLES -->
+      <div class="bubble b1"></div>
+      <div class="bubble b2"></div>
+      <div class="bubble b3"></div>
+
+      <!-- HEADER -->
       <div class="event-header">
-        <div>✦ Comprovante ✦</div>
+        <div class="ev-label">✦ Comprovante de Inscrição ✦</div>
+
         <div class="ev-title">
-          Treinamento
-          <span>INFANTIL</span>
+          Treinamento para o Departamento
+          <span class="infantil"> INFANTIL </span>
+        </div>
+
+        <div class="ev-info">
+          📅 06 de Junho · 🕑 14h às 16h<br />
+          📍 Assembleia de Deus · Marizópolis-PB
         </div>
       </div>
 
-      <div class="avatar">
-        <img id="avatar" />
+      <div class="divider"></div>
+
+      <!-- AVATAR -->
+      <div class="avatar-section">
+        <div class="avatar-outer">
+          <div class="avatar-ring">
+            <div class="avatar-img" id="avatar"></div>
+          </div>
+
+          <div class="badge-ok">✓ INSCRITO</div>
+        </div>
       </div>
 
+      <!-- INFO -->
       <div class="info">
-        <div class="name" id="nome"></div>
-        <div id="igreja"></div>
-        <div id="cidade"></div>
+        <div class="lbl">Inscrito(a)</div>
+
+        <div class="info-name" id="nome">Carregando...</div>
+
+        <div class="info-grid">
+          <div class="info-box">
+            <div class="lbl">Igreja</div>
+
+            <div class="ibv" id="igreja"></div>
+          </div>
+
+          <div class="info-box">
+            <div class="lbl">Cidade</div>
+
+            <div class="ibv" id="cidade"></div>
+          </div>
+        </div>
+
+        <div class="date-chip" id="data"></div>
       </div>
 
-      <div class="qr">
-        <img id="qr" />
+      <div class="divider"></div>
+
+      <!-- QR -->
+      <div class="qr-section">
+        <div class="qr-lbl">🔐 Código de Validação</div>
+
+        <div class="qr-outer">
+          <img id="qr" crossorigin="anonymous" />
+        </div>
+
+        <div class="hash-code" id="hash"></div>
       </div>
 
-      <button class="btn btn-primary" onclick="window.print()">Baixar</button>
+      <!-- LOGO -->
+      <div class="church-footer">
+        <img id="logo" crossorigin="anonymous" />
+      </div>
+
+      <!-- BOTÃO -->
+      <button class="btn-download" onclick="downloadCard()">
+        ⬇️ Salvar Comprovante
+      </button>
+      ```
     </div>
 
+    <!-- HTML2CANVAS -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <script>
-      const API =
-        "https://script.google.com/macros/s/AKfycby1q7-NzidTa01sQfeHObyscFsFePxYAshfJfVLUNSum4PUs6WHSldmoXn1TAAqKOdU/exec";
+      /* ===================================
+       PEGAR HASH
+    =================================== */
 
       const id = new URLSearchParams(window.location.search).get("id");
 
-      fetch(API + "?id=" + id)
+      /* ===================================
+       SUA API APPS SCRIPT
+    =================================== */
+
+      const API =
+        "https://script.google.com/macros/s/AKfycby1q7-NzidTa01sQfeHObyscFsFePxYAshfJfVLUNSum4PUs6WHSldmoXn1TAAqKOdU/exec?id=";
+
+      /* ===================================
+       FETCH
+    =================================== */
+
+      fetch(API + id)
         .then((r) => r.json())
         .then((data) => {
-          if (data.error) {
-            document.body.innerHTML = "<h2>Não encontrado</h2>";
-            return;
-          }
-
+          /* NOME */
           document.getElementById("nome").innerText = data.nome;
+
+          /* IGREJA */
           document.getElementById("igreja").innerText = data.igreja;
+
+          /* CIDADE */
           document.getElementById("cidade").innerText = data.cidade;
-          document.getElementById("avatar").src = data.avatar;
+
+          /* HASH */
+          document.getElementById("hash").innerText = id;
+
+          /* LOGO */
+          document.getElementById("logo").src = data.logo;
+
+          /* AVATAR */
+          document.getElementById("avatar").style.backgroundImage =
+            `url('${data.avatar}')`;
+
+          /* DATA */
+          document.getElementById("data").innerHTML = "🗓️ Inscrição confirmada";
+
+          /* ===================================
+           QR CODE
+        =================================== */
+
+          const validarUrl =
+            "https://moacirdavidag.github.io/depin-admz/validar.html?id=" + id;
 
           document.getElementById("qr").src =
-            "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" +
-            encodeURIComponent(window.location.href);
+            "https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=" +
+            encodeURIComponent(validarUrl);
+        })
+
+        .catch((err) => {
+          console.error(err);
+
+          document.getElementById("nome").innerText = "Erro ao carregar";
         });
+
+      /* ===================================
+       DOWNLOAD CARD
+    =================================== */
+
+      function downloadCard() {
+        const card = document.getElementById("card");
+
+        const btn = document.querySelector(".btn-download");
+
+        btn.style.display = "none";
+
+        html2canvas(card, {
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: null,
+        })
+          .then((canvas) => {
+            btn.style.display = "block";
+
+            const a = document.createElement("a");
+
+            a.download = "comprovante.png";
+
+            a.href = canvas.toDataURL("image/png");
+
+            a.click();
+          })
+
+          .catch(() => {
+            btn.style.display = "block";
+
+            alert("Erro ao gerar imagem.");
+          });
+      }
     </script>
+    <footer class="app-footer">
+      <div class="footer-content">
+        <!-- DEV -->
+        <div class="dev">
+          Desenvolvido por
+          <a href="https://moacirdavidag.com" target="_blank" class="dev-name">
+            Moacir David
+          </a>
+
+          <a
+            href="https://instagram.com/moacirdavidag"
+            target="_blank"
+            class="insta"
+          >
+            <i data-lucide="instagram"></i>
+            @moacirdavidag
+          </a>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta">
+          <div class="cta-title">Conheça o <span>eScriptura</span></div>
+
+          <div class="cta-text">
+            Sistema digital para gestão da Escola Bíblica Dominical — ideal para
+            igrejas e especialmente Assembleias de Deus.
+          </div>
+
+          <a
+            href="https://escripturaebd.com?utm_source=depinadmz2026"
+            target="_blank"
+            class="cta-btn"
+          >
+            👉 Ver sistema agora
+          </a>
+
+          <div class="cta-social">
+            <i data-lucide="instagram"></i>
+            @escripturaebd
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

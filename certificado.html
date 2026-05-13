@@ -3,49 +3,141 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Certificado</title>
+    <title>Treinamento DEPIN - AD Marizópolis/PB - Certificado</title>
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Nunito:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
 
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #1a0a2e;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start; /* 🔥 IMPORTANTE */
+        min-height: 100vh;
+        padding: 20px;
+        font-family: "Nunito", sans-serif;
+      }
+
+      /* ===== FAIXA COLORIDA ===== */
+      .top-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: linear-gradient(90deg, #ff4b8b, #ffd600, #4bff91, #4bb8ff);
+      }
+
+      /* ===== CERTIFICADO ===== */
       .cert-wrapper {
         width: 297mm;
         height: 210mm;
-        margin: 40px auto;
         position: relative;
-        background: linear-gradient(135deg, #4a0e82, #7b2fbe, #9c3fe0);
-        color: #fff;
+        background: linear-gradient(135deg, #5e1aa8, #7b2fbe, #9c3fe0);
         overflow: hidden;
       }
 
-      /* HEADER */
-      .header {
+      /* ===== BORDA INTERNA ===== */
+      .cert-wrapper::after {
+        content: "";
         position: absolute;
-        top: 18mm;
-        left: 18mm;
-        opacity: 0.6;
-        font-size: 10px;
-        text-transform: uppercase;
+        inset: 8mm;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 14px;
       }
 
-      /* CENTRAL */
+      /* ===== BOLHAS ===== */
+      .cert-wrapper::before {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        top: -120px;
+        right: -120px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+      }
+
+      /* ===== SAFE AREA ===== */
+      .cert-safe {
+        position: absolute;
+        inset: 14mm;
+      }
+
+      /* HEADER */
+      .cert-header {
+        color: #fff;
+        opacity: 0.8;
+      }
+
+      .cert-header .org {
+        font-size: 9pt;
+        letter-spacing: 3px;
+      }
+
+      .cert-header .title {
+        margin-top: 6px;
+        font-size: 14pt;
+        font-weight: 800;
+      }
+
+      .cert-header .title span {
+        color: #ffd600;
+      }
+
+      /* LINHA DECORATIVA */
+      .line {
+        width: 120px;
+        height: 4px;
+        margin-top: 8px;
+        background: linear-gradient(90deg, #ffd600, #ff4b8b);
+        border-radius: 10px;
+      }
+
+      /* CENTRO */
       .center {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         text-align: center;
-        padding: 20mm;
+        width: 80%;
+      }
+
+      .center small {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        color: #eee;
       }
 
       .name {
-        font-size: 34px;
-        font-family: "Playfair Display";
+        font-family: "Playfair Display", serif;
+        font-size: 34pt;
+        font-weight: 900;
+        color: #ffd600;
+        margin: 12px 0;
+      }
+
+      .text {
+        color: #fff;
+        font-size: 13pt;
+        line-height: 1.7;
+      }
+
+      .text strong {
+        font-weight: 800;
+      }
+      .date {
         color: #ffd600;
         font-weight: 900;
       }
@@ -53,27 +145,76 @@
       /* FOOTER */
       .footer {
         position: absolute;
-        bottom: 15mm;
-        width: 100%;
+        bottom: 20mm;
+        left: 14mm;
+        right: 14mm;
         display: flex;
         justify-content: space-between;
-        padding: 0 18mm;
+        align-items: flex-end;
+        color: #fff;
       }
 
-      .sig {
-        text-align: center;
-      }
-
-      .line {
-        width: 200px;
+      .sig-line {
+        width: 220px;
         height: 2px;
-        background: rgba(255, 255, 255, 0.7);
+        background: #fff;
         margin-bottom: 6px;
       }
 
+      .logo {
+        text-align: center;
+      }
+
       .logo img {
-        height: 120px;
-        object-fit: contain;
+        height: 90px;
+        filter: brightness(0) invert(1);
+      }
+
+      .logo span {
+        display: block;
+        font-size: 9pt;
+        opacity: 0.8;
+        margin-top: 4px;
+      }
+
+      /* TIMESTAMP */
+      .timestamp {
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 8pt;
+        color: #fff;
+        opacity: 0.6;
+      }
+
+      /* BOTÕES */
+      .btn-wrap {
+        margin-top: 20px;
+        display: flex;
+        gap: 12px;
+      }
+
+      button {
+        padding: 14px 22px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 800;
+      }
+
+      .print {
+        background: #ffd600;
+      }
+      .save {
+        background: #4bb8ff;
+      }
+
+      /* FORÇA CORES NO PDF */
+      .cert-wrapper,
+      body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
 
       /* PRINT */
@@ -83,54 +224,295 @@
           margin: 0;
         }
 
+        html,
         body {
-          background: none;
+          width: 297mm;
+          height: 210mm;
+          background: #1a0a2e !important;
+
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+
+        body {
+          display: block;
+        }
+
+        .btn-wrap {
+          display: none !important;
         }
 
         .cert-wrapper {
-          margin: 0;
-          box-shadow: none;
+          width: 297mm;
+          height: 210mm;
+          position: absolute;
+          top: 0;
+          left: 0;
+
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
         }
       }
+
+      .cert-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      /* MOBILE RESPONSIVO REAL */
+      @media (max-width: 768px) {
+        .cert-wrapper {
+          width: 100%;
+          height: auto;
+          aspect-ratio: 297 / 210; /* mantém proporção A4 */
+        }
+
+        .cert-safe {
+          inset: 5%;
+        }
+
+        .center {
+          width: 90%;
+        }
+
+        .name {
+          font-size: clamp(18px, 5vw, 26px);
+        }
+
+        .text {
+          font-size: clamp(12px, 3.5vw, 14px);
+        }
+
+        .footer {
+          flex-direction: column;
+          gap: 20px;
+          align-items: center;
+          bottom: 10%;
+        }
+
+        .logo img {
+          height: 60px;
+        }
+      }
+
+      .toast {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.9);
+
+        background: #ff4b4b;
+        color: #fff;
+
+        padding: 18px 24px;
+        border-radius: 16px;
+
+        font-weight: 800;
+        text-align: center;
+
+        opacity: 0;
+        pointer-events: none;
+
+        z-index: 9999;
+
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+
+        transition: 0.3s;
+      }
+
+      .toast.show {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
     </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <div class="cert-wrapper">
-      <div class="header">
-        Assembleia de Deus - Marizópolis PB<br />
-        Treinamento Infantil
+    <header class="main-header">
+      <div class="depin-logo">
+        <span>D</span>
+        <span>E</span>
+        <span>P</span>
+        <span>I</span>
+        <span>N</span>
       </div>
+      <div class="depin-sub">AD • Marizópolis PB</div>
+    </header>
+    <div class="top-bar"></div>
+    <div id="toast-block" class="toast">
+      ⚠️ Emissão de certificados disponível apenas em 06/06/2026
+    </div>
+    <div class="cert-container">
+      <div class="cert-wrapper" id="cert">
+        <div class="cert-safe">
+          <div class="cert-header">
+            <div class="org">
+              IGREJA EVANGÉLICA ASSEMBLEIA DE DEUS • MARIZÓPOLIS - PB
+            </div>
+            <div class="title">
+              Treinamento para o Departamento <span>INFANTIL</span>
+            </div>
+            <div class="line"></div>
+          </div>
 
-      <div class="center">
-        <div>Certificado</div>
-        <div class="name" id="nome"></div>
-        <p style="max-width: 600px; margin-top: 20px">
-          participou e concluiu o treinamento infantil.
-        </p>
-      </div>
+          <div class="center">
+            <small>Certificamos que</small>
 
-      <div class="footer">
-        <div class="sig">
-          <div class="line"></div>
-          Pastor Local
+            <div class="name" id="nome"></div>
+
+            <div class="text">
+              participou e concluiu com êxito o
+              <strong>Treinamento para o Departamento Infantil</strong>,
+              realizado em <span class="date">06 de junho de 2026</span>, na
+              Igreja Evangélica Assembleia de Deus em Marizópolis - PB.
+            </div>
+          </div>
+
+          <div class="footer">
+            <div>
+              <div class="sig-line"></div>
+              <div>Pr. Albertino Silva</div>
+              <div style="font-size: 9pt; opacity: 0.7">Pastor Local</div>
+            </div>
+
+            <div class="logo">
+              <img id="logo" />
+              <span>ASSEMBLEIA DE DEUS<br />MARIZÓPOLIS - PB</span>
+            </div>
+          </div>
         </div>
 
-        <div class="logo">
-          <img id="logo" />
-        </div>
+        <div class="timestamp" id="timestamp"></div>
       </div>
     </div>
 
-    <script>
-      const id = new URLSearchParams(window.location.search).get("id");
+    <div class="btn-wrap">
+      <button class="print" onclick="window.print()">🖨️ PDF</button>
+      <button class="save" onclick="baixar()">⬇️ PNG</button>
+    </div>
 
-      fetch("https://script.google.com/macros/s/AKfycby1q7-NzidTa01sQfeHObyscFsFePxYAshfJfVLUNSum4PUs6WHSldmoXn1TAAqKOdU/exec?id=" + id)
-        .then((r) => r.json())
-        .then((data) => {
-          document.getElementById("nome").innerText = data.nome;
-          document.getElementById("logo").src = data.logo;
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script>
+      const params = new URLSearchParams(location.search);
+      const id = params.get("id");
+      const debug = params.get("debug") === "true";
+
+      let nomePessoa = null;
+
+      /* =========================
+     CONTROLE DE DATA
+  ========================= */
+
+      const hoje = new Date();
+      const liberacao = new Date("2026-06-06T00:00:00");
+
+      const podeExibir = hoje >= liberacao || debug;
+
+      const cert = document.getElementById("cert");
+      const toast = document.getElementById("toast-block");
+
+      if (!podeExibir) {
+        cert.style.display = "none";
+
+        setTimeout(() => {
+          toast.classList.add("show");
+        }, 200);
+      } else {
+        toast.style.display = "none";
+
+        fetch(
+          "https://script.google.com/macros/s/AKfycby1q7-NzidTa01sQfeHObyscFsFePxYAshfJfVLUNSum4PUs6WHSldmoXn1TAAqKOdU/exec?id=" +
+            id,
+        )
+          .then((r) => r.json())
+          .then((d) => {
+            document.getElementById("nome").innerText = d.nome;
+            document.getElementById("logo").src = d.logo;
+            nomePessoa = d.nome;
+          })
+          .catch(() => {
+            cert.innerHTML =
+              "<h2 style='color:white;text-align:center'>Erro ao carregar certificado</h2>";
+          });
+      }
+
+      /* =========================
+     TIMESTAMP
+  ========================= */
+      document.getElementById("timestamp").innerText =
+        "Certificado gerado em " + new Date().toLocaleString("pt-BR");
+
+      /* =========================
+     DOWNLOAD
+  ========================= */
+      function baixar() {
+        if (!nomePessoa) return;
+
+        html2canvas(document.getElementById("cert"), {
+          scale: 3,
+          useCORS: true,
+        }).then((c) => {
+          const a = document.createElement("a");
+          a.href = c.toDataURL();
+          a.download = `certificado-depin-admarizopolispb-${nomePessoa}.png`;
+          a.click();
         });
+      }
     </script>
+    <footer class="app-footer">
+      <div class="footer-content">
+        <!-- DEV -->
+        <div class="dev">
+          Desenvolvido por
+          <a href="https://moacirdavidag.com" target="_blank" class="dev-name">
+            Moacir David
+          </a>
+
+          <a
+            href="https://instagram.com/moacirdavidag"
+            target="_blank"
+            class="insta"
+          >
+            <i data-lucide="instagram"></i>
+            @moacirdavidag
+          </a>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta">
+          <div class="cta-title">Conheça o <span>eScriptura</span></div>
+
+          <div class="cta-text">
+            Sistema digital para gestão da Escola Bíblica Dominical — ideal para
+            igrejas e especialmente Assembleias de Deus.
+          </div>
+
+          <a
+            href="https://escripturaebd.com?utm_source=depinadmz2026"
+            target="_blank"
+            class="cta-btn"
+          >
+            👉 Ver sistema agora
+          </a>
+
+          <div class="cta-social">
+            <i data-lucide="instagram"></i>
+            @escripturaebd
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
