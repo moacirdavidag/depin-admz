@@ -533,6 +533,7 @@
     />
 
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="./favicon.png" />
   </head>
 
   <body>
@@ -635,72 +636,87 @@
 
     <script>
       /* ===================================
-       PEGAR HASH
-    =================================== */
-
+     PEGAR HASH
+  =================================== */
       const id = new URLSearchParams(window.location.search).get("id");
 
       /* ===================================
-       SUA API APPS SCRIPT
-    =================================== */
-
+     SUA API (SEM CORS - JSONP)
+  =================================== */
       const API =
         "https://script.google.com/macros/s/AKfycby1q7-NzidTa01sQfeHObyscFsFePxYAshfJfVLUNSum4PUs6WHSldmoXn1TAAqKOdU/exec?id=";
 
       /* ===================================
-       FETCH
-    =================================== */
+     JSONP LOAD
+  =================================== */
+      function carregarDados(id) {
+        const script = document.createElement("script");
 
-      fetch(API + id)
-        .then((r) => r.json())
-        .then((data) => {
-          /* NOME */
-          document.getElementById("nome").innerText = data.nome;
+        script.src = API + id + "&callback=renderComprovante";
 
-          /* IGREJA */
-          document.getElementById("igreja").innerText = data.igreja;
-
-          /* CIDADE */
-          document.getElementById("cidade").innerText = data.cidade;
-
-          /* HASH */
-          document.getElementById("hash").innerText = id;
-
-          /* LOGO */
-          document.getElementById("logo").src = data.logo;
-
-          /* AVATAR */
-          document.getElementById("avatar").style.backgroundImage =
-            `url('${data.avatar}')`;
-
-          /* DATA */
-          document.getElementById("data").innerHTML = "🗓️ Inscrição confirmada";
-
-          /* ===================================
-           QR CODE
-        =================================== */
-
-          const validarUrl =
-            "https://moacirdavidag.github.io/depin-admz/validar.html?id=" + id;
-
-          document.getElementById("qr").src =
-            "https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=" +
-            encodeURIComponent(validarUrl);
-        })
-
-        .catch((err) => {
-          console.error(err);
-
+        script.onerror = () => {
           document.getElementById("nome").innerText = "Erro ao carregar";
-        });
+        };
+
+        document.body.appendChild(script);
+      }
 
       /* ===================================
-       DOWNLOAD CARD
-    =================================== */
+     CALLBACK (RESPOSTA DA API)
+  =================================== */
+      function renderComprovante(data) {
+        if (!data || data.error) {
+          document.getElementById("nome").innerText = "Não encontrado";
+          return;
+        }
 
+        /* NOME */
+        document.getElementById("nome").innerText = data.nome;
+
+        /* IGREJA */
+        document.getElementById("igreja").innerText = data.igreja;
+
+        /* CIDADE */
+        document.getElementById("cidade").innerText = data.cidade;
+
+        /* HASH */
+        document.getElementById("hash").innerText = id;
+
+        /* LOGO */
+        document.getElementById("logo").src = data.logo;
+
+        /* AVATAR */
+        document.getElementById("avatar").style.backgroundImage =
+          `url('${data.avatar}')`;
+
+        /* DATA */
+        document.getElementById("data").innerHTML = "🗓️ Inscrição confirmada";
+
+        /* ===================================
+       QR CODE
+    =================================== */
+        const validarUrl =
+          "https://moacirdavidag.github.io/depin-admz/validar.html?id=" + id;
+
+        document.getElementById("qr").src =
+          "https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=" +
+          encodeURIComponent(validarUrl);
+      }
+
+      /* ===================================
+     INICIAR
+  =================================== */
+      if (id) {
+        carregarDados(id);
+      } else {
+        document.getElementById("nome").innerText = "ID inválido";
+      }
+
+      /* ===================================
+     DOWNLOAD CARD
+  =================================== */
       function downloadCard() {
         const card = document.getElementById("card");
-
         const btn = document.querySelector(".btn-download");
 
         btn.style.display = "none";
@@ -715,17 +731,12 @@
             btn.style.display = "block";
 
             const a = document.createElement("a");
-
             a.download = "comprovante.png";
-
             a.href = canvas.toDataURL("image/png");
-
             a.click();
           })
-
           .catch(() => {
             btn.style.display = "block";
-
             alert("Erro ao gerar imagem.");
           });
       }

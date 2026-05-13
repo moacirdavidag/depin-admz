@@ -128,7 +128,7 @@
         }
       }
     </style>
-     <link
+    <link
       href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;800;900&display=swap"
       rel="stylesheet"
     />
@@ -138,6 +138,7 @@
     />
 
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="./favicon.png" />
   </head>
 
   <body>
@@ -214,5 +215,80 @@
         </div>
       </div>
     </footer>
+    <script>
+      /* ===================================
+     PEGAR ID
+  =================================== */
+      const id = new URLSearchParams(window.location.search).get("id");
+
+      /* ===================================
+     API (JSONP)
+  =================================== */
+      const API =
+        "https://script.google.com/macros/s/AKfycby1q7-NzidTa01sQfeHObyscFsFePxYAshfJfVLUNSum4PUs6WHSldmoXn1TAAqKOdU/exec?id=";
+
+      /* ===================================
+     CARREGAR DADOS (JSONP)
+  =================================== */
+      function carregarValidacao(id) {
+        const script = document.createElement("script");
+
+        script.src = API + id + "&callback=renderValidacao";
+
+        script.onerror = () => {
+          mostrarInvalido("Erro ao validar");
+        };
+
+        document.body.appendChild(script);
+      }
+
+      /* ===================================
+     CALLBACK
+  =================================== */
+      function renderValidacao(data) {
+        if (!data || data.error) {
+          mostrarInvalido("Certificado inválido");
+          return;
+        }
+
+        /* STATUS */
+        document.getElementById("status").innerText = "Válido";
+        document.getElementById("status").classList.add("valid");
+
+        /* ICON */
+        document.getElementById("icon").innerText = "✔";
+
+        /* DADOS */
+        document.getElementById("nome").innerText = data.nome;
+        document.getElementById("igreja").innerText = data.igreja;
+        document.getElementById("cidade").innerText = data.cidade;
+
+        /* HASH */
+        document.getElementById("hash").innerText = id;
+      }
+
+      /* ===================================
+     ESTADO INVÁLIDO
+  =================================== */
+      function mostrarInvalido(msg) {
+        document.getElementById("status").innerText = "Inválido";
+        document.getElementById("status").classList.add("invalid");
+
+        document.getElementById("icon").innerText = "❌";
+
+        document.getElementById("nome").innerText = msg;
+        document.getElementById("igreja").innerText = "";
+        document.getElementById("cidade").innerText = "";
+      }
+
+      /* ===================================
+     INICIAR
+  =================================== */
+      if (id) {
+        carregarValidacao(id);
+      } else {
+        mostrarInvalido("ID inválido");
+      }
+    </script>
   </body>
 </html>

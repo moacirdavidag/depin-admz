@@ -336,6 +336,7 @@
     />
 
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="./favicon.png" />
   </head>
 
   <body>
@@ -427,25 +428,45 @@
         cert.style.display = "none";
 
         setTimeout(() => {
-          toast.classList.add("show");
+          if (toast) toast.classList.add("show");
         }, 200);
       } else {
-        toast.style.display = "none";
+        if (toast) toast.style.display = "none";
 
-        fetch(
+        carregarDados(id);
+      }
+
+      /* =========================
+     JSONP (SEM CORS)
+  ========================= */
+
+      function carregarDados(id) {
+        const script = document.createElement("script");
+
+        script.src =
           "https://script.google.com/macros/s/AKfycby1q7-NzidTa01sQfeHObyscFsFePxYAshfJfVLUNSum4PUs6WHSldmoXn1TAAqKOdU/exec?id=" +
-            id,
-        )
-          .then((r) => r.json())
-          .then((d) => {
-            document.getElementById("nome").innerText = d.nome;
-            document.getElementById("logo").src = d.logo;
-            nomePessoa = d.nome;
-          })
-          .catch(() => {
-            cert.innerHTML =
-              "<h2 style='color:white;text-align:center'>Erro ao carregar certificado</h2>";
-          });
+          id +
+          "&callback=renderCert";
+
+        script.onerror = () => {
+          cert.innerHTML =
+            "<h2 style='color:white;text-align:center'>Erro ao carregar certificado</h2>";
+        };
+
+        document.body.appendChild(script);
+      }
+
+      function renderCert(d) {
+        if (!d || d.error) {
+          cert.innerHTML =
+            "<h2 style='color:white;text-align:center'>Certificado não encontrado</h2>";
+          return;
+        }
+
+        document.getElementById("nome").innerText = d.nome;
+        document.getElementById("logo").src = d.logo;
+
+        nomePessoa = d.nome;
       }
 
       /* =========================
