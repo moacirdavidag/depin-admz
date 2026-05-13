@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DEPIN AD Marizópolis</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: radial-gradient(ellipse at top, #3d0f6e 0%, #1a0635 100%);
+        padding: 20px;
+      }
+
+      .landing {
+        width: 100%;
+        max-width: 520px;
+        background: linear-gradient(160deg, #6a1fa8, #7b2fbe, #8e35d4);
+        border-radius: 28px;
+        padding: 32px 24px;
+        color: #fff;
+        text-align: center;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .landing::before {
+        content: "";
+        position: absolute;
+        top: -120px;
+        right: -120px;
+        width: 250px;
+        height: 250px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 50%;
+      }
+
+      .landing::after {
+        content: "";
+        position: absolute;
+        bottom: -120px;
+        left: -120px;
+        width: 220px;
+        height: 220px;
+        background: rgba(255, 214, 0, 0.08);
+        border-radius: 50%;
+      }
+
+      .landing h1 {
+        font-family: "Fredoka One", cursive;
+        font-size: 26px;
+        margin-bottom: 6px;
+        letter-spacing: 1px;
+      }
+
+      .landing p {
+        font-size: 14px;
+        opacity: 0.8;
+        margin-bottom: 22px;
+      }
+
+      .input-box {
+        margin: 20px 0;
+        position: relative;
+      }
+
+      .landing input {
+        width: 100%;
+        padding: 16px;
+        border-radius: 16px;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+        backdrop-filter: blur(8px);
+      }
+
+      .landing input::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .btn {
+        width: 100%;
+        padding: 15px;
+        border-radius: 16px;
+        border: none;
+        cursor: pointer;
+        font-family: "Fredoka One", cursive;
+        font-size: 14px;
+        letter-spacing: 1px;
+        margin-top: 12px;
+        transition: 0.2s;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #ff4b8b, #ffd600);
+        color: #2a0a4a;
+      }
+
+      .btn-secondary {
+        background: linear-gradient(135deg, #4bb8ff, #4bff91);
+        color: #0b1a2a;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .footer-text {
+        margin-top: 18px;
+        font-size: 11px;
+        opacity: 0.6;
+      }
+
+      @media (max-width: 480px) {
+        .landing {
+          padding: 26px 18px;
+        }
+
+        .landing h1 {
+          font-size: 22px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="landing">
+      <h1>DEPIN AD Marizópolis</h1>
+      <p>Consulta de Comprovante e Certificado Oficial</p>
+
+      <div class="input-box">
+        <input id="id" placeholder="Digite seu código (hash)" />
+      </div>
+
+      <button class="btn btn-primary" onclick="abrirComprovante()">
+        📄 Abrir Comprovante
+      </button>
+
+      <button class="btn btn-secondary" onclick="abrirCertificado()">
+        🏅 Abrir Certificado
+      </button>
+
+      <div class="footer-text">Sistema oficial de validação de inscrições</div>
+    </div>
+
+    <script>
+      const BASE = "https://moacirdavidag.github.io/depin-admz";
+
+      function abrirComprovante() {
+        const id = document.getElementById("id").value.trim();
+        if (!id) return alert("Digite o código");
+        window.location.href = `${BASE}/comprovante.html?id=${id}`;
+      }
+
+      function abrirCertificado() {
+        const id = document.getElementById("id").value.trim();
+        if (!id) return alert("Digite o código");
+        window.location.href = `${BASE}/certificado.html?id=${id}`;
+      }
+    </script>
+  </body>
+</html>

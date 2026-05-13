@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Comprovante</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="card">
+      <div class="event-header">
+        <div>✦ Comprovante ✦</div>
+        <div class="ev-title">
+          Treinamento
+          <span>INFANTIL</span>
+        </div>
+      </div>
+
+      <div class="avatar">
+        <img id="avatar" />
+      </div>
+
+      <div class="info">
+        <div class="name" id="nome"></div>
+        <div id="igreja"></div>
+        <div id="cidade"></div>
+      </div>
+
+      <div class="qr">
+        <img id="qr" />
+      </div>
+
+      <button class="btn btn-primary" onclick="window.print()">Baixar</button>
+    </div>
+
+    <script>
+      const API =
+        "https://script.google.com/macros/s/AKfycby1q7-NzidTa01sQfeHObyscFsFePxYAshfJfVLUNSum4PUs6WHSldmoXn1TAAqKOdU/exec";
+
+      const id = new URLSearchParams(window.location.search).get("id");
+
+      fetch(API + "?id=" + id)
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.error) {
+            document.body.innerHTML = "<h2>Não encontrado</h2>";
+            return;
+          }
+
+          document.getElementById("nome").innerText = data.nome;
+          document.getElementById("igreja").innerText = data.igreja;
+          document.getElementById("cidade").innerText = data.cidade;
+          document.getElementById("avatar").src = data.avatar;
+
+          document.getElementById("qr").src =
+            "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" +
+            encodeURIComponent(window.location.href);
+        });
+    </script>
+  </body>
+</html>
