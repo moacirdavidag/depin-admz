@@ -282,7 +282,9 @@ function renderCert(d) {
     return;
   }
   nomePessoa = d.nome;
-  nomeEl.textContent = d.nome;
+  nomeEl.textContent = d.nome
+  .toLowerCase()
+  .replace(/\b\w/g, l => l.toUpperCase());
 
   gerarMetaCertificado(id);
 
