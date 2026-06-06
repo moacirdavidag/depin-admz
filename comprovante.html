@@ -633,6 +633,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script>
+      const params = new URLSearchParams(window.location.search);
+      const certificadoModo = params.get("certificado") === "sim";
       /* ===================================
      PEGAR HASH
   =================================== */
@@ -642,7 +644,7 @@
      SUA API (SEM CORS - JSONP)
   =================================== */
       const API =
-        "https://script.google.com/macros/s/AKfycbzVbs9kyHWNTPPI_Hs6Ihkdd8ia8Mp7IfXP4dA4DxH3VnvYCDNJpAFf3y-EpJH1LZ8/exec?id=";
+        "https://script.google.com/macros/s/AKfycbwqj-LLeFZVWAc94AONcbTLO2Z_LOKSQTd6w53fzl-hKAQGhIXNKq2IPnRtuLbZJ02T/exec?id=";
 
       /* ===================================
      JSONP LOAD
@@ -659,47 +661,84 @@
         document.body.appendChild(script);
       }
 
+      function aplicarModoComprovante() {
+  document.querySelector(".ev-label").innerText =
+    "✦ Comprovante de Inscrição ✦";
+
+  document.getElementById("data").innerHTML =
+    "🗓️ Inscrição confirmada";
+}
+
+function aplicarModoCertificado(data) {
+  /* HEADER */
+  document.querySelector(".ev-label").innerText =
+    "✦ Certificado de Participação ✦";
+
+  /* TEXTO PRINCIPAL */
+  const texto = `
+    Participou do Treinamento para o DEPIN em <b>06 de junho de 2026</b><br>
+    na Assembleia de Deus em <b>Marizópolis - PB</b>,<br>
+    das <b>14h às 16h</b>.
+  `;
+
+  const dataEl = document.getElementById("data");
+  dataEl.innerHTML = texto;
+
+  /* 🔥 AJUSTE VISUAL */
+  dataEl.style.display = "block";
+  dataEl.style.textAlign = "center";
+  dataEl.style.lineHeight = "1.6";
+  dataEl.style.padding = "10px 14px";
+
+  /* GRID OPCIONAL (pode esconder se quiser simplificar) */
+  document.querySelector(".info-grid").style.display = "none";
+
+  /* BADGE */
+  const badge = document.querySelector(".badge-ok");
+  badge.innerText = "✓ PARTICIPOU";
+  badge.style.background =
+    "linear-gradient(135deg,#00c853,#69f0ae)";
+}
+
       /* ===================================
      CALLBACK (RESPOSTA DA API)
   =================================== */
-      function renderComprovante(data) {
-        if (!data || data.error) {
-          document.getElementById("nome").innerText = "Não encontrado";
-          return;
-        }
+function renderComprovante(data) {
+  if (!data || data.error) {
+    document.getElementById("nome").innerText = "Não encontrado";
+    return;
+  }
 
-        /* NOME */
-        document.getElementById("nome").innerText = data.nome;
+  const nomeEl = document.getElementById("nome");
+  const igrejaEl = document.getElementById("igreja");
+  const cidadeEl = document.getElementById("cidade");
+  const dataEl = document.getElementById("data");
 
-        /* IGREJA */
-        document.getElementById("igreja").innerText = data.igreja;
+  /* DADOS */
+  nomeEl.innerText = data.nome;
+  igrejaEl.innerText = data.igreja;
+  cidadeEl.innerText = data.cidade;
 
-        /* CIDADE */
-        document.getElementById("cidade").innerText = data.cidade;
+  document.getElementById("hash").innerText = id;
+  document.getElementById("logo").src = data.logo;
+  document.getElementById("avatar").style.backgroundImage =
+    `url('${data.avatar}')`;
 
-        /* HASH */
-        document.getElementById("hash").innerText = id;
+  /* 🔥 MODO CERTIFICADO */
+  if (certificadoModo) {
+    aplicarModoCertificado(data);
+  } else {
+    aplicarModoComprovante(data);
+  }
 
-        /* LOGO */
-        document.getElementById("logo").src = data.logo;
+  /* QR */
+  const validarUrl =
+    "https://moacirdavidag.github.io/depin-admz/certificado.html?id=" + id;
 
-        /* AVATAR */
-        document.getElementById("avatar").style.backgroundImage =
-          `url('${data.avatar}')`;
-
-        /* DATA */
-        document.getElementById("data").innerHTML = "🗓️ Inscrição confirmada";
-
-        /* ===================================
-       QR CODE
-    =================================== */
-        const validarUrl =
-          "https://moacirdavidag.github.io/depin-admz/validar.html?id=" + id;
-
-        document.getElementById("qr").src =
-          "https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=" +
-          encodeURIComponent(validarUrl);
-      }
+  document.getElementById("qr").src =
+    "https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=" +
+    encodeURIComponent(validarUrl);
+}
 
       /* ===================================
      INICIAR
